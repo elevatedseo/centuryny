@@ -1,0 +1,14 @@
+---
+interface Item { title: string; text: string; icon?: string; }
+interface Props { items: Item[]; }
+const { items } = Astro.props;
+---
+<div class="service-cards">
+  {items.map((item) => <article>{item.icon && <img src={item.icon} alt="" width="100" height="100" loading="lazy" />}<div><h2>{item.title}</h2><p>{item.text}</p></div></article>)}
+</div>
+<style>
+  .service-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(2.5rem,7vw,7rem);width:min(76rem,100%);margin:0 auto;padding:clamp(1rem,3vw,2rem) clamp(1.5rem,5vw,4rem) clamp(4rem,8vw,7rem)}
+  article{display:grid;grid-template-columns:4.5rem 1fr;gap:1.5rem;padding:clamp(2rem,4vw,3.5rem) 0;border-bottom:1px solid #d7d3ca}
+  img{width:4.5rem;height:4.5rem;object-fit:contain}h2{margin:0 0 .8rem;font-size:.78rem;letter-spacing:.13em;line-height:1.45;text-transform:uppercase}p{margin:0;color:#626058;font-family:Georgia,"Times New Roman",serif;font-size:1rem;line-height:1.75}
+  @media(max-width:760px){.service-cards{grid-template-columns:1fr}}@media(max-width:430px){article{grid-template-columns:1fr}}
+</style>

@@ -1,0 +1,16 @@
+---
+import { announcement } from '../data/site';
+---
+
+{announcement.enabled && (
+  <aside class="announcement" aria-label="Announcement">
+    <p>
+      {announcement.message}
+      {announcement.href && announcement.linkLabel && <a href={announcement.href}>{announcement.linkLabel}</a>}
+    </p>
+  </aside>
+)}
+
+<style>
+  .announcement{display:grid;min-height:2.75rem;place-items:center;padding:.65rem 1.25rem;background:#d12240;color:#fff;text-align:center}.announcement p{margin:0;font-size:.72rem;font-weight:700;letter-spacing:.1em;line-height:1.5;text-transform:uppercase}.announcement a{margin-left:.75rem;text-underline-offset:.2em}
+</style>

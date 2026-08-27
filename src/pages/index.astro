@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Century Management - A New York Property Management Company';
+const description = 'Founded in 1971, Century Management is a leading full-service property management company in New York. We specialize in managing rentals, co-ops, condos and more.';
+---
+
+<BaseLayout {title} {description}>
+  <main>
+    <p class="eyebrow">New York</p>
+    <h1>Century</h1>
+    <p class="status">A new website is taking shape.</p>
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    display: grid;
+    min-height: calc(100vh - 5rem);
+    min-height: calc(100svh - 5rem);
+    align-content: center;
+    padding: clamp(1.5rem, 6vw, 6rem);
+    border: clamp(0.75rem, 2vw, 1.5rem) solid #171714;
+  }
+
+  .eyebrow,
+  .status {
+    margin: 0;
+    font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+    font-weight: 650;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 10ch;
+    margin: 0.08em 0 0.12em;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(5rem, 20vw, 18rem);
+    font-weight: 400;
+    letter-spacing: -0.075em;
+    line-height: 0.85;
+  }
+
+  .status {
+    color: #5d5a52;
+    letter-spacing: 0.08em;
+  }
+</style>

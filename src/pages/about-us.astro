@@ -1,0 +1,25 @@
+---
+import AboutHero from '../components/AboutHero.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HistorySection from '../components/HistorySection.astro';
+import LeadershipGrid from '../components/LeadershipGrid.astro';
+import StatisticsGrid from '../components/StatisticsGrid.astro';
+---
+
+<BaseLayout
+  title="New York Property Management Company - About Us | Century NY"
+  description="Century Management is New York's go-to property management company. Our mission is to deliver only the highest quality service and experience to all of our clients & residents."
+>
+  <AboutHero />
+  <section class="what-we-do" aria-labelledby="what-we-do-heading">
+    <div><p class="eyebrow">What We Do</p><h2 id="what-we-do-heading">What We Do</h2></div>
+    <div class="copy"><p>We’re a full service New York property management company, specializing in rental, co-op, and condo management. Over the years, we have developed an effective style of property management that allows us to build and retain lasting relationships with our clients. Our progressive style and dedication to improving the means by which we do business is what sets us apart from other property management companies.</p><blockquote>Our mission is to deliver the best management experience in the industry.</blockquote></div>
+  </section>
+  <StatisticsGrid />
+  <HistorySection />
+  <LeadershipGrid />
+</BaseLayout>
+
+<style>
+  .what-we-do{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(3rem,9vw,9rem);width:min(76rem,100%);margin:0 auto;padding:clamp(5rem,10vw,9rem) clamp(1.5rem,5vw,4rem)}.eyebrow{margin:0 0 .75rem;color:#d12240;font-size:.72rem;font-weight:750;letter-spacing:.16em;text-transform:uppercase}h2{margin:0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.4rem,5vw,4.5rem);font-weight:400}.copy>p{margin:0;color:#5c5952;font-family:Georgia,"Times New Roman",serif;font-size:1.08rem;line-height:1.85}.copy blockquote{margin:2.5rem 0 0;padding-left:1.5rem;border-left:3px solid #d12240;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.35rem,2.4vw,2rem);font-style:italic;line-height:1.45}@media(max-width:700px){.what-we-do{grid-template-columns:1fr}}
+</style>

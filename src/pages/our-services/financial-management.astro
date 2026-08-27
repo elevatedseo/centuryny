@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCards from '../../components/ServiceCards.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+
+const services = [
+  { title: 'Long-Term Capital Planning', icon: '/assets/services/icon-capital-planning-1.png', text: 'Planning for the future is an essential component of a successful property management plan. To achieve forward project planning, Century will work with the board to determine a long-range plan for your property. This five-year plan allows you to set priorities and establish funding sources. Planning for the future will increase the quality of life in a building, as well as maintain the operational and fiscal health of the property.' },
+  { title: 'Insurance Services', icon: '/assets/services/icon-insurance.png', text: 'Century Management will analyze your property’s current financial and insurance needs and make recommendations for cost-effective changes. We have utilized our purchasing power to achieve savings for our clients in a variety of structured programs. Whether it’s workers’ compensation, disability or general liability insurance, we stay on top of the market to bring you the best carriers at a competitive rate. Our $100,000,000 umbrella liability policy saves our clients significant sums over the competition.' },
+  { title: 'Commercial and Residential Leasing', icon: '/assets/services/icon-leasing-1.png', text: 'At the board’s request, Century Management will lease commercial and/or residential space. We have leased over 300,000 square feet of commercial space and rooftop rights, as well as over 4,000 parking spaces for our clients. Experience, market knowledge and strong negotiating skills ensure that a property maximizes its potential commercial revenue stream.' },
+  { title: 'Mortgage Brokerage Services', icon: '/assets/services/icon-mortgage.png', text: 'Help today and down the line. Over the past 12 years, Century has originated over 100 transactions totaling $300,000,000 in mortgages and lines of credit for our clients.' },
+];
+---
+
+<BaseLayout
+  title="Financial Management for Properties - Capital Planning | Century Management"
+  description="Century Management in NY specializes in managing your property's financial resources, helping to generate income and determining long-range planning. Learn more."
+>
+  <ServiceHero image="/assets/services/Header-financial-mgmt.jpg" tagline="We know your profitability is determined by the decisions you make along the way." title="Financial Management" />
+  <section class="service-intro"><p>Our team of experts possesses the knowledge to advise you and help generate income through investing activities and cash management. Our annual budgeting process is both comprehensive and accurate.</p></section>
+  <ServiceCards items={services} />
+</BaseLayout>
+
+<style>
+  .service-intro{padding:clamp(4rem,9vw,8rem) clamp(1.5rem,5vw,4rem) clamp(2rem,4vw,3rem);text-align:center}.service-intro p{max-width:58rem;margin:0 auto;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.5rem,3vw,2.4rem);line-height:1.45}
+</style>

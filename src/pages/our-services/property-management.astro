@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCards from '../../components/ServiceCards.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+
+const firstServices = [
+  { title: 'Code Compliance Department', icon: '/assets/services/icon-code-compliance-1.png', text: 'Complying with the numerous complex regulations governing cooperative and condominium housing requires accurate record-keeping procedures and organizational skills. Century Management monitors timetables and other actions necessary for making the timely inspections required for filing documents with government agencies. The comprehensive Building Information Profile is an important tool in assisting our team and the board to meet all required compliance actions.' },
+  { title: 'Day-to-Day Building Operations Management', icon: '/assets/services/icon-day-operations.png', text: 'As a component of our property management program, Century will coordinate your building’s staff responsibilities. We also include development of reporting procedures, employee log forms and inventory control systems within that program. Century will develop a Staff Manual tailored to your building’s needs, which includes work schedules, job descriptions and procedures.' },
+  { title: 'Monthly Meeting Plan', icon: '/assets/services/icon-monthly-meeting.png', text: 'In addition to actively participating at the monthly meeting, Century will first assist the board in planning it, and will serve as an information resource, providing support and advice on important matters and issues confronting the board.' },
+];
+
+const secondServices = [
+  { title: 'On-Site Building Visits', icon: '/assets/services/icon-onsite-visits.png', text: 'Our dedicated property management team will regularly visit your building and inspect the grounds to check for potential problems. In addition, we’ll complete a thorough monthly roof-to-basement inspection. To ensure your satisfaction, photographs of the inspection are available upon request. This way, board members can oversee the inspection at their leisure.' },
+  { title: 'Monthly Management Report', icon: '/assets/services/icon-monthly-report-1.png', text: 'Your Monthly Property Management Report includes a summary of your building’s financial, legal and physical status, as well as an update on the progress of current projects.' },
+  { title: 'Energy Management Programs', icon: '/assets/services/icon-energy-1.png', text: 'Century will consult with your board regarding ways to conserve energy and cut costs for your property. Additionally, we will make recommendations for renovations or alterations that will help improve your building’s energy efficiency. Energy consumption reports and graphs are prepared, utilized and adjusted for degree days.' },
+  { title: 'Century Purchasing Power', icon: '/assets/services/icon-purchasing-1.png', text: 'With 12,000 units under management, Century has been able to negotiate terms and pricing levels that few can match. Contractors for capital improvements must complete Century disclosure forms, enabling conflicts to be discovered before a contract is awarded, not after.' },
+  { title: 'Life Safety Program', icon: '/assets/services/icon-life-safety-1.png', text: 'Century is concerned for the safety of all our residents. We review the fire safety plan of each building and distribute it to both residents and staff. This plan is customized for each building, taking into account its size, means of egress and age.' },
+  { title: 'Resident Tools and 24-Hour Service', icon: '/assets/services/icon-paging-service.png', text: 'Residents have access to convenient online tools. Our property management professionals are also available 24 hours a day, seven days a week to respond to emergencies you or your residents may have.' },
+];
+---
+
+<BaseLayout
+  title="Property Management in NY - Building Management Services | Century NY"
+  description="Specializing in NY property management for over 40 years, Century Management's services are expansive and all encompassing. Contact us for more info."
+>
+  <ServiceHero image="/assets/services/Header-property-mgmt.jpg" tagline="Managing New York City properties is an art – it takes experience, expertise and total commitment to quality service." title="Property Management" />
+  <section class="service-intro"><p>Specializing in rental, co-op and condo management for over 50 years, Century’s management activities are expansive and all-encompassing.</p></section>
+  <ServiceCards items={firstServices} />
+  <figure class="image-break"><img src="/assets/services/Property-mgmt-lobby-2.jpg" alt="A Century-managed residential lobby" width="2000" height="1000" loading="lazy" /><figcaption>We offer scalable management solutions for every size property.</figcaption></figure>
+  <ServiceCards items={secondServices} />
+  <figure class="image-break final"><img src="/assets/services/Property-mgmt-balcony.jpg" alt="A residential building framed by mature trees" width="2000" height="1000" loading="lazy" /></figure>
+</BaseLayout>
+
+<style>
+  .service-intro{padding:clamp(4rem,9vw,8rem) clamp(1.5rem,5vw,4rem) clamp(2rem,4vw,3rem);text-align:center}.service-intro p{max-width:58rem;margin:0 auto;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.5rem,3vw,2.4rem);line-height:1.45}
+  .image-break{position:relative;margin:0;background:#171714}.image-break img{display:block;width:100%;max-height:43rem;object-fit:cover}.image-break figcaption{position:absolute;inset:0;display:grid;align-items:center;padding:clamp(2rem,8vw,8rem);background:rgb(0 0 0/38%);color:#fff;font-family:Georgia,"Times New Roman",serif;font-size:clamp(2rem,5vw,4.5rem);line-height:1.08}.image-break.final img{max-height:34rem}
+</style>

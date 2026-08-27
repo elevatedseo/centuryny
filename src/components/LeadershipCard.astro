@@ -1,0 +1,12 @@
+---
+import type { Leader } from '../data/leadership';
+interface Props { leader: Leader; }
+const { leader } = Astro.props;
+---
+<article>
+  <div class="portrait">{leader.image ? <img src={leader.image} alt={`${leader.name}, ${leader.title}`} width="300" height="440" loading="lazy" /> : <div class="placeholder" role="img" aria-label={`${leader.name} portrait pending verification`}><span>Image pending verification</span></div>}</div>
+  <h3>{leader.name}</h3><p>{leader.title}</p>
+</article>
+<style>
+  article{text-align:center}.portrait{aspect-ratio:3/4;overflow:hidden;background:#dedbd3}.portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}.placeholder{display:grid;width:100%;height:100%;place-items:center;padding:1.5rem;background:repeating-linear-gradient(135deg,#e7e4dc,#e7e4dc 12px,#dedbd3 12px,#dedbd3 24px);color:#6a675f}.placeholder span{padding:.7rem;background:#f4f1ea;font-size:.65rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase}h3{margin:1.3rem 0 .35rem;font-family:Georgia,"Times New Roman",serif;font-size:1.25rem;font-weight:400}p{margin:0;color:#77736b;font-size:.68rem;font-weight:700;letter-spacing:.1em;line-height:1.5;text-transform:uppercase}
+</style>

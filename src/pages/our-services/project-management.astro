@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+
+const projects = [
+  'Local Law 11 – Façade Projects',
+  'HVAC Mechanical Upgrades and Replacement',
+  'Roof Replacements',
+  'Window Replacement',
+  'Riser Replacement Projects',
+  'Energy Improvement Projects – NYSERDA',
+  'Lobby and Hallway Renovations',
+  'Laundry Room Upgrades',
+  'Community Tennis Court Replacements',
+  'Community Pool Installations',
+  'Community Landscaping Projects',
+  'Amenity Room Upgrades',
+];
+---
+
+<BaseLayout
+  title="NY Property Management - Project Management | Century NY"
+  description="From lobby renovations to exterior façade restoration, Century Management in NY can seamlessly management all the aspects of your real estate project."
+>
+  <ServiceHero image="/assets/services/Header-project-mgmt.jpg" tagline="Coordination and organization is essential at every step of a project from start to finish." title="Project Management" />
+  <section class="project-copy">
+    <p class="lead">From lobby renovations to exterior façade restoration, Century has proven success in seamlessly managing projects for our clients.</p>
+    <div class="columns">
+      <div>
+        <h2>Experienced oversight from start to finish</h2>
+        <p>Century has vast experience managing all of your building’s major repairs, upgrades and capital improvement projects.</p>
+        <p>An experienced project management team is critical to the success and maintenance of any property in our portfolio. Our agents and their team work closely with engineers, architects, contractors and other professionals throughout a major project, while providing equal attention to residents and their needs. Understanding all of the moving parts from start to finish sets Century apart.</p>
+      </div>
+      <div class="experience">
+        <h2>Our project management experience includes</h2>
+        <ul>{projects.map((project) => <li>{project}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .project-copy{width:min(76rem,100%);margin:0 auto;padding:clamp(4rem,9vw,8rem) clamp(1.5rem,5vw,4rem)}.lead{max-width:60rem;margin:0 auto clamp(4rem,8vw,7rem);font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.5rem,3vw,2.4rem);line-height:1.45;text-align:center}.columns{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,8vw,8rem)}h2{margin:0 0 1.25rem;font-size:.82rem;letter-spacing:.13em;line-height:1.5;text-transform:uppercase}.columns p{color:#626058;font-family:Georgia,"Times New Roman",serif;font-size:1.05rem;line-height:1.8}.experience{padding:clamp(2rem,4vw,3rem);background:#e9e5dc}.experience ul{display:grid;gap:.8rem;margin:0;padding:0;list-style:none}.experience li{position:relative;padding-left:1.25rem;color:#4f4c45;font-size:.78rem;font-weight:650;letter-spacing:.06em;line-height:1.55;text-transform:uppercase}.experience li::before{position:absolute;left:0;color:#d12240;content:'—'}@media(max-width:760px){.columns{grid-template-columns:1fr}}
+</style>

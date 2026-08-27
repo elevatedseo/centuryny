@@ -1,0 +1,10 @@
+---
+import { featuredProperties } from '../data/featuredProperties';
+import PropertyCard from './PropertyCard.astro';
+---
+<section class="property-grid" aria-label="Featured properties">
+  {featuredProperties.map((property, index) => <PropertyCard {property} eager={index < 3} />)}
+</section>
+<style>
+  .property-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;background:#fff}@media(max-width:800px){.property-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){.property-grid{grid-template-columns:1fr}}
+</style>

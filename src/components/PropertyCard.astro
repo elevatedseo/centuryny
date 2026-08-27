@@ -1,0 +1,14 @@
+---
+import type { FeaturedProperty } from '../data/featuredProperties';
+interface Props { property: FeaturedProperty; eager?: boolean; }
+const { property, eager = false } = Astro.props;
+---
+<article>
+  <a href={property.href} aria-label={`View ${property.name}`}>
+    <img src={property.image} alt={property.name} width="1000" height="1000" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} />
+    <span aria-hidden="true">+</span>
+  </a>
+</article>
+<style>
+  article{overflow:hidden;background:#dedbd3}a{position:relative;display:block;aspect-ratio:1;text-decoration:none}img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 350ms ease}span{position:absolute;inset:0;display:grid;place-items:center;background:rgb(209 34 64/82%);color:#fff;font-family:Arial,sans-serif;font-size:3rem;font-weight:200;opacity:0;transition:opacity 220ms ease}a:hover img,a:focus-visible img{transform:scale(1.035)}a:hover span,a:focus-visible span{opacity:1}@media(prefers-reduced-motion:reduce){img,span{transition:none}}
+</style>
