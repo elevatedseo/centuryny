@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PropertyDetailSlider from '../../components/PropertyDetailSlider.astro';
+import { propertyDetails, type PropertyDetail } from '../../data/propertyDetails';
+
+export function getStaticPaths() {
+  return propertyDetails.map((property) => ({ params: { slug: property.slug }, props: { property } }));
+}
+
+interface Props { property: PropertyDetail; }
+const { property } = Astro.props;
+const description = `${property.title}${property.address ? `, ${property.address}` : ''}. A featured property managed by Century Management.`;
+---
+
+<BaseLayout title={`${property.title} - Century Management`} {description}>
+  <PropertyDetailSlider {property} />
+</BaseLayout>

@@ -1,0 +1,84 @@
+---
+import type { PropertyDetail } from '../data/propertyDetails';
+import { propertyImages } from '../data/propertyDetails';
+
+interface Props { property: PropertyDetail; }
+const { property } = Astro.props;
+const images = propertyImages(property);
+---
+
+<main class="property-slider" data-property-slider aria-roledescription="carousel" aria-label={`${property.title} image gallery`}>
+  <div class="slides" aria-live="polite">
+    {images.map((image, index) => (
+      <figure class="slide" data-property-slide aria-hidden={index === 0 ? 'false' : 'true'}>
+        <img src={image} alt={`${property.title}, view ${index + 1}`} width="1600" height="1000" loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} />
+      </figure>
+    ))}
+  </div>
+
+  <div class="property-info">
+    <p class="eyebrow">Featured Property</p>
+    <h1>{property.title}</h1>
+    {property.address && <p class="address">{property.address}</p>}
+    <a href="/featured-properties/">Back to properties</a>
+  </div>
+
+  <button class="arrow previous" type="button" aria-label="Previous property image" data-property-previous>‹</button>
+  <button class="arrow next" type="button" aria-label="Next property image" data-property-next>›</button>
+  <div class="counter" aria-hidden="true"><span data-property-current>1</span> / {images.length}</div>
+  <div class="dots" aria-label="Choose an image">
+    {images.map((_, index) => <button type="button" aria-label={`Show image ${index + 1}`} aria-current={index === 0 ? 'true' : 'false'} data-property-dot></button>)}
+  </div>
+</main>
+
+<script>
+  const slider = document.querySelector<HTMLElement>('[data-property-slider]');
+  if (slider) {
+    const slides = [...slider.querySelectorAll<HTMLElement>('[data-property-slide]')];
+    const dots = [...slider.querySelectorAll<HTMLButtonElement>('[data-property-dot]')];
+    const currentLabel = slider.querySelector<HTMLElement>('[data-property-current]');
+    let current = 0;
+    const show = (index: number) => {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => slide.setAttribute('aria-hidden', String(i !== current)));
+      dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
+      if (currentLabel) currentLabel.textContent = String(current + 1);
+    };
+    slider.querySelector('[data-property-previous]')?.addEventListener('click', () => show(current - 1));
+    slider.querySelector('[data-property-next]')?.addEventListener('click', () => show(current + 1));
+    dots.forEach((dot, index) => dot.addEventListener('click', () => show(index)));
+    slider.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') show(current - 1);
+      if (event.key === 'ArrowRight') show(current + 1);
+    });
+  }
+</script>
+
+<style>
+  .property-slider { position: relative; min-height: calc(100svh - 5rem); overflow: hidden; background: #171719; color: #fff; }
+  .slides, .slide { position: absolute; inset: 0; }
+  .slide { margin: 0; opacity: 0; visibility: hidden; transition: opacity 700ms ease, visibility 700ms ease; }
+  .slide[aria-hidden='false'] { opacity: 1; visibility: visible; }
+  .slide::after { position: absolute; inset: 0; background: linear-gradient(90deg, rgb(0 0 0 / 52%), transparent 62%), linear-gradient(0deg, rgb(0 0 0 / 22%), transparent 45%); content: ''; }
+  .slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .property-info { position: absolute; z-index: 2; top: 50%; left: clamp(4rem, 10vw, 10rem); width: min(34rem, calc(100% - 8rem)); transform: translateY(-50%); }
+  .eyebrow { margin: 0 0 1rem; color: #ef304d; font-size: .72rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+  h1 { margin: 0; font-family: Hind, Arial, sans-serif; font-size: clamp(3rem, 6.5vw, 6rem); font-weight: 300; letter-spacing: -.035em; line-height: .98; }
+  .address { margin: 1.35rem 0 0; font-size: clamp(1rem, 1.5vw, 1.25rem); letter-spacing: .05em; }
+  .property-info a { display: inline-flex; margin-top: 2rem; padding: .78rem 1.3rem; border: 1px solid rgb(255 255 255 / 70%); border-radius: 999px; font-size: .7rem; font-weight: 750; letter-spacing: .12em; text-decoration: none; text-transform: uppercase; transition: background 180ms ease, border-color 180ms ease; }
+  .property-info a:hover, .property-info a:focus-visible { border-color: #d12240; background: #d12240; }
+  .arrow { position: absolute; z-index: 3; top: 50%; width: 3.25rem; height: 5rem; border: 0; background: rgb(0 0 0 / 28%); color: #fff; cursor: pointer; font: 300 3rem/1 Arial, sans-serif; transform: translateY(-50%); }
+  .arrow:hover, .arrow:focus-visible { background: #d12240; }
+  .previous { left: 0; } .next { right: 0; }
+  .counter { position: absolute; z-index: 3; right: 2rem; bottom: 2rem; font-size: .7rem; font-weight: 700; letter-spacing: .16em; }
+  .dots { position: absolute; z-index: 3; bottom: 2rem; left: 50%; display: flex; gap: .7rem; transform: translateX(-50%); }
+  .dots button { width: .7rem; height: .7rem; padding: 0; border: 1px solid #fff; border-radius: 50%; background: transparent; cursor: pointer; }
+  .dots button[aria-current='true'] { background: #fff; }
+  @media (max-width: 700px) {
+    .property-slider { min-height: 42rem; }
+    .property-info { top: auto; right: 3.25rem; bottom: 5rem; left: 3.25rem; width: auto; transform: none; }
+    h1 { font-size: clamp(2.5rem, 12vw, 4rem); }
+    .arrow { width: 2.5rem; height: 4rem; font-size: 2.25rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .slide { transition: none; } }
+</style>
