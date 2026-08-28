@@ -1,0 +1,158 @@
+---
+const services = [
+  {
+    title: 'Better Property Management',
+    text: 'Our progressive approach to property management reduces operating costs and tenant turnover, ensures compliance, and increases the value of your investment.',
+    href: '/our-services/property-management/',
+    icon: '/assets/home/icon-home-property-mgmt.png',
+  },
+  {
+    title: 'Strategic Financial Management',
+    text: 'The stronger your financial management the greater your opportunity to maximize profits in the short term and grow your capital value in the long run.',
+    href: '/our-services/financial-management/',
+    icon: '/assets/home/icon-home-financial-mgmt.png',
+  },
+  {
+    title: 'Efficient Project Management',
+    text: 'Our experienced project management team will seamlessly manage all your major building repairs, upgrades and capital improvements.',
+    href: '/our-services/project-management/',
+    icon: '/assets/home/icon-home-project-mgmt.png',
+  },
+] as const;
+
+const properties = Array.from({ length: 5 }, (_, index) => ({
+  src: `/assets/home/Century-property-home-${index + 1}.jpg`,
+  alt: `A Century-managed New York residential property, view ${index + 1}`,
+}));
+---
+
+<section class="intro content-width">
+  <div>
+    <h2>Century is New York's go-to property management team.</h2>
+    <span class="rule"></span>
+  </div>
+  <div>
+    <p>We manage a broad portfolio of residential buildings, specializing in rental coop, condo management and sales and leasing.</p>
+    <a class="outline-button" href="/contact-us/">Request a quote <span aria-hidden="true">›</span></a>
+  </div>
+</section>
+
+<section class="services-feature">
+  <div class="content-width service-overview">
+    <div class="red-panel">
+      <h2>Our Services</h2>
+      <span class="rule light"></span>
+      <p>We’re constantly evolving our approach and methods to save our clients time and money by delivering the most advanced real estate and management services in the industry.</p>
+    </div>
+  </div>
+</section>
+
+<section class="service-cards content-width" aria-label="Management services">
+  {services.map((service) => (
+    <article>
+      <img src={service.icon} alt="" width="48" height="48" />
+      <h3><a href={service.href}>{service.title}</a></h3>
+      <p>{service.text}</p>
+    </article>
+  ))}
+</section>
+
+<section class="resident-tools split-photo">
+  <div class="photo" role="img" aria-label="Century resident tools displayed on a tablet"></div>
+  <div class="copy-panel pale">
+    <h2>Online tools for our board members and residents.</h2>
+    <span class="rule"></span>
+    <p>Our board members and residents have easy online access to all their building information from any device. Board members have a secure access to important updates, files and documents. Resident enjoy easy online payments, maintenance requests, access to Building Link, and important forms and applications.</p>
+  </div>
+</section>
+
+<section class="who-we-are two-panels">
+  <div class="copy-panel red centered"><h2>Who we are</h2></div>
+  <div class="copy-panel white">
+    <p class="statement">Our unique style of management and expert team allows us to deliver the best property management experience in the industry.</p>
+    <a class="outline-button" href="/about-us/">More about us <span aria-hidden="true">›</span></a>
+  </div>
+</section>
+
+<section class="properties-intro two-panels">
+  <div class="copy-panel white">
+    <h2>Modest to massive – we've got you covered.</h2>
+    <span class="rule"></span>
+    <p>Our hands-on approach to property management allows us to offer scalable solutions for buildings of any size, ranging from a handful of units into the thousands.</p>
+    <a class="outline-button" href="/featured-properties/">View Properties <span aria-hidden="true">›</span></a>
+  </div>
+  <div class="property-gallery" aria-label="Featured Century properties">
+    {properties.map((property, index) => (
+      <img src={property.src} alt={property.alt} width="1100" height="900" loading={index === 0 ? 'eager' : 'lazy'} />
+    ))}
+  </div>
+</section>
+
+<section class="testimonial">
+  <div class="content-width">
+    <h2>What our clients have to say.</h2>
+    <div class="video-frame">
+      <iframe
+        title="Lonnie Quinn Testimonial - Century Management Services, Inc"
+        src="https://www.youtube-nocookie.com/embed/0e1YVJkl6hY"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<style>
+  .content-width { width: min(1180px, calc(100% - 3rem)); margin-inline: auto; }
+  h2, h3, p { font-family: Hind, Arial, sans-serif; }
+  h2 { margin: 0; font-size: clamp(2.25rem, 4vw, 3rem); font-weight: 300; letter-spacing: .01em; line-height: 1.25; }
+  p { color: #6f7781; font-size: 1rem; line-height: 1.8; }
+  .rule { display: block; width: 6.25rem; margin: 2.35rem 0; border-top: 1px solid #d12240; }
+  .rule.light { border-color: #fff; }
+  .intro { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 9vw, 8rem); padding-block: clamp(5rem, 9vw, 8rem); background: #fff; }
+  .intro p { margin-top: .35rem; }
+  .outline-button { display: inline-flex; align-items: center; gap: 1.4rem; width: fit-content; margin-top: 2rem; padding: .9rem 1.5rem; border: 1px solid #7a828d; border-radius: 999px; background: #fff; color: #6c747e; font-size: .82rem; letter-spacing: .03em; text-decoration: none; text-transform: uppercase; transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease; }
+  .outline-button:hover, .outline-button:focus-visible { border-color: #d12240; background: #d12240; color: #fff; transform: translateY(-1px); }
+  .services-feature { min-height: 42rem; padding-top: 5rem; background: url('/assets/home/Home-services.jpg') center/cover fixed; }
+  .service-overview { display: flex; align-items: flex-start; }
+  .red-panel { width: 50%; padding: clamp(3rem, 7vw, 6rem); background: #d12240; color: #fff; }
+  .red-panel h2 { text-transform: uppercase; }
+  .red-panel p { color: #fff; }
+  .service-cards { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: -12.5rem; margin-bottom: 6rem; background: #fff; box-shadow: 0 7px 26px rgb(0 0 0 / 8%); }
+  .service-cards article { min-height: 25rem; padding: 5rem 3rem; text-align: center; }
+  .service-cards article + article { border-left: 1px solid #eee; }
+  .service-cards img { width: auto; height: 3.15rem; object-fit: contain; }
+  .service-cards h3 { margin: 2rem 0 1.4rem; font-size: .92rem; letter-spacing: .04em; text-transform: uppercase; }
+  .service-cards h3 a { text-decoration: none; }
+  .split-photo, .two-panels { display: grid; grid-template-columns: 1fr 1fr; }
+  .resident-tools .photo { min-height: 38rem; background: url('/assets/home/Ipad-resident-tools.jpg') center/cover no-repeat; }
+  .copy-panel { display: flex; flex-direction: column; justify-content: center; min-height: 32rem; padding: clamp(3.5rem, 8vw, 8rem); }
+  .copy-panel.pale { background: #f9f9f9; }
+  .copy-panel.red { background: #d12240; color: #fff; }
+  .copy-panel.white { background: #fff; }
+  .copy-panel.centered { align-items: center; text-align: center; }
+  .statement { margin: 0; color: #7a828d; font-size: 1.45rem; font-weight: 600; letter-spacing: .07em; line-height: 1.5; }
+  .property-gallery { display: grid; min-height: 38rem; overflow: hidden; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); }
+  .property-gallery img { width: 100%; height: 100%; min-height: 0; object-fit: cover; }
+  .property-gallery img:first-child { grid-row: span 2; }
+  .property-gallery img:nth-child(n+4) { display: none; }
+  .testimonial { padding-block: clamp(5rem, 8vw, 7.5rem); background: #f9f9f9; }
+  .testimonial h2 { margin-bottom: 3.75rem; }
+  .video-frame { position: relative; width: 100%; padding-top: 56.25%; background: #111; }
+  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  @media (max-width: 800px) {
+    .intro, .split-photo, .two-panels { grid-template-columns: 1fr; }
+    .intro { gap: 1rem; }
+    .services-feature { min-height: 34rem; padding-top: 0; background-attachment: scroll; }
+    .service-overview { width: 100%; }
+    .red-panel { width: 100%; }
+    .service-cards { grid-template-columns: 1fr; margin-top: 0; margin-bottom: 0; width: 100%; box-shadow: none; }
+    .service-cards article { min-height: 0; padding: 3.5rem 2rem; }
+    .service-cards article + article { border-top: 1px solid #eee; border-left: 0; }
+    .resident-tools .photo { min-height: 23rem; }
+    .copy-panel { min-height: 25rem; padding: 3.5rem 2rem; }
+    .properties-intro .property-gallery { min-height: 29rem; }
+  }
+</style>

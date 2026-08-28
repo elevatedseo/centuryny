@@ -1,0 +1,232 @@
+---
+const slides = [
+  {
+    title: 'Smart Management',
+    text: 'Managing New York properties is an art – it takes experience, the right tools, attention to detail, and total commitment to quality service.',
+    href: '/our-services/property-management/',
+    image: '/assets/home/Home-main-slider-skyline-1.webp',
+  },
+  {
+    title: 'Expert Team',
+    text: 'We combine forty years of experience with the most advanced systems to manage every size property with maximum efficiency and effectiveness.',
+    href: '/about-us/',
+    image: '/assets/home/Home-main-slider-lobby-1.webp',
+  },
+  {
+    title: 'Happy Residents',
+    text: 'Upgrading the way your building operates and enhancing the lives of your residents is what drives us.',
+    href: '/our-services/property-management/',
+    image: '/assets/home/Home-main-slider-outdoors-1.webp',
+  },
+] as const;
+---
+
+<section class="home-slider" aria-roledescription="carousel" aria-label="Century Management highlights" data-slider>
+  <div class="slides" aria-live="polite">
+    {slides.map((slide, index) => (
+      <article
+        class="slide"
+        data-slide
+        aria-hidden={index === 0 ? 'false' : 'true'}
+        style={`--slide-image: url('${slide.image}')`}
+      >
+        <div class="slide-content">
+          <h1>{slide.title}</h1>
+          <p><span>{slide.text}</span></p>
+          <a href={slide.href}>Learn more</a>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <button class="arrow previous" type="button" aria-label="Previous slide" data-previous>‹</button>
+  <button class="arrow next" type="button" aria-label="Next slide" data-next>›</button>
+
+  <div class="indicators" aria-label="Choose a slide">
+    {slides.map((slide, index) => (
+      <button
+        type="button"
+        aria-label={`Show ${slide.title}`}
+        aria-current={index === 0 ? 'true' : 'false'}
+        data-indicator
+      ></button>
+    ))}
+  </div>
+</section>
+
+<script>
+  const slider = document.querySelector<HTMLElement>('[data-slider]');
+
+  if (slider) {
+    const slides = [...slider.querySelectorAll<HTMLElement>('[data-slide]')];
+    const indicators = [...slider.querySelectorAll<HTMLButtonElement>('[data-indicator]')];
+    const previous = slider.querySelector<HTMLButtonElement>('[data-previous]');
+    const next = slider.querySelector<HTMLButtonElement>('[data-next]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let current = 0;
+    let timer: number | undefined;
+
+    const show = (index: number) => {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => slide.setAttribute('aria-hidden', String(slideIndex !== current)));
+      indicators.forEach((indicator, indicatorIndex) => indicator.setAttribute('aria-current', String(indicatorIndex === current)));
+    };
+
+    const stop = () => window.clearInterval(timer);
+    const start = () => {
+      stop();
+      if (!reducedMotion.matches) timer = window.setInterval(() => show(current + 1), 9000);
+    };
+
+    previous?.addEventListener('click', () => { show(current - 1); start(); });
+    next?.addEventListener('click', () => { show(current + 1); start(); });
+    indicators.forEach((indicator, index) => indicator.addEventListener('click', () => { show(index); start(); }));
+    slider.addEventListener('mouseenter', stop);
+    slider.addEventListener('mouseleave', start);
+    slider.addEventListener('focusin', stop);
+    slider.addEventListener('focusout', start);
+    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+    start();
+  }
+</script>
+
+<style>
+  .home-slider {
+    position: relative;
+    min-height: calc(100svh - 5rem);
+    overflow: hidden;
+    background: #252525;
+    color: #fff;
+  }
+
+  .slides,
+  .slide {
+    position: absolute;
+    inset: 0;
+  }
+
+  .slide {
+    display: grid;
+    align-items: center;
+    background-image: linear-gradient(90deg, rgb(0 0 0 / 26%), rgb(0 0 0 / 5%)), var(--slide-image);
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 850ms ease, visibility 850ms ease;
+  }
+
+  .slide[aria-hidden='false'] {
+    z-index: 1;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .slide-content {
+    width: min(80%, 1180px);
+    margin-inline: auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  h1 {
+    max-width: 10ch;
+    margin: 0 0 1.25rem;
+    font-family: Hind, Arial, sans-serif;
+    font-size: clamp(3.2rem, 7vw, 6.25rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  p {
+    max-width: 51rem;
+    margin: 0;
+    font-family: Hind, Arial, sans-serif;
+    font-size: clamp(1.05rem, 1.65vw, 1.5rem);
+    line-height: 1.5;
+  }
+
+  p span {
+    box-decoration-break: clone;
+    padding: 0.42rem 0.7rem;
+    background: rgb(0 0 0 / 50%);
+    -webkit-box-decoration-break: clone;
+  }
+
+  .slide-content > a {
+    display: inline-block;
+    margin-top: 3.55rem;
+    padding: 1rem 2.15rem;
+    background: #ee2424;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 750;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 150ms ease;
+  }
+
+  .slide-content > a:hover,
+  .slide-content > a:focus-visible {
+    background: #c71920;
+  }
+
+  .arrow {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    width: 3.25rem;
+    height: 5rem;
+    border: 0;
+    background: rgb(0 0 0 / 25%);
+    color: #fff;
+    cursor: pointer;
+    font: 300 3rem/1 Arial, sans-serif;
+    transform: translateY(-50%);
+  }
+
+  .arrow:hover,
+  .arrow:focus-visible {
+    background: rgb(0 0 0 / 55%);
+  }
+
+  .previous { left: 0; }
+  .next { right: 0; }
+
+  .indicators {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 2rem;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.7rem;
+  }
+
+  .indicators button {
+    width: 0.65rem;
+    height: 0.65rem;
+    padding: 0;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .indicators button[aria-current='true'] { background: #fff; }
+
+  @media (max-width: 700px) {
+    .home-slider { min-height: min(44rem, calc(100svh - 5rem)); }
+    .slide-content { width: 100%; padding: 3rem 3.25rem 5rem; }
+    h1 { font-size: clamp(2.8rem, 14vw, 4.5rem); }
+    p { font-size: 1rem; line-height: 1.65; }
+    .slide-content > a { margin-top: 2.25rem; }
+    .arrow { width: 2.5rem; height: 4rem; font-size: 2.25rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide { transition: none; }
+  }
+</style>
