@@ -24,6 +24,10 @@ const links = [
     external: true,
   },
 ];
+
+const currentPath = Astro.url.pathname;
+const isCurrent = (href: string) => currentPath === href;
+const servicesAreCurrent = currentPath.startsWith('/our-services/');
 ---
 
 <header class="site-header">
@@ -32,11 +36,11 @@ const links = [
   </a>
 
   <nav class="desktop-nav" aria-label="Primary navigation">
-    <a href={links[0].href}>{links[0].label}</a>
+    <a href={links[0].href} class:list={{ active: isCurrent(links[0].href) }} aria-current={isCurrent(links[0].href) ? 'page' : undefined}>{links[0].label}</a>
     <div class="services-menu">
-      <a href={services[0].href} aria-haspopup="true">Services</a>
+      <a href={services[0].href} aria-haspopup="true" class:list={{ active: servicesAreCurrent }} aria-current={servicesAreCurrent ? 'page' : undefined}>Services</a>
       <div class="submenu">
-        {services.map((item) => <a href={item.href}>{item.label}</a>)}
+        {services.map((item) => <a href={item.href} class:list={{ active: isCurrent(item.href) }} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
       </div>
     </div>
     {links.slice(1).map((item) => (
@@ -44,6 +48,8 @@ const links = [
         href={item.href}
         target={item.external ? '_blank' : undefined}
         rel={item.external ? 'noopener noreferrer' : undefined}
+        class:list={{ active: !item.external && isCurrent(item.href) }}
+        aria-current={!item.external && isCurrent(item.href) ? 'page' : undefined}
       >
         {item.label}
       </a>
@@ -53,11 +59,11 @@ const links = [
   <details class="mobile-nav">
     <summary aria-label="Open navigation"><span>Menu</span></summary>
     <nav aria-label="Mobile navigation">
-      <a href={links[0].href}>{links[0].label}</a>
+      <a href={links[0].href} class:list={{ active: isCurrent(links[0].href) }} aria-current={isCurrent(links[0].href) ? 'page' : undefined}>{links[0].label}</a>
       <details>
-        <summary>Services</summary>
+        <summary class:list={{ active: servicesAreCurrent }}>Services</summary>
         <div class="mobile-submenu">
-          {services.map((item) => <a href={item.href}>{item.label}</a>)}
+          {services.map((item) => <a href={item.href} class:list={{ active: isCurrent(item.href) }} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>)}
         </div>
       </details>
       {links.slice(1).map((item) => (
@@ -65,6 +71,8 @@ const links = [
           href={item.href}
           target={item.external ? '_blank' : undefined}
           rel={item.external ? 'noopener noreferrer' : undefined}
+          class:list={{ active: !item.external && isCurrent(item.href) }}
+          aria-current={!item.external && isCurrent(item.href) ? 'page' : undefined}
         >
           {item.label}
         </a>
@@ -107,6 +115,7 @@ const links = [
   }
 
   .desktop-nav a {
+    position: relative;
     padding: 1.25rem 0;
     font-size: clamp(0.57rem, 0.72vw, 0.72rem);
     font-weight: 700;
@@ -121,7 +130,23 @@ const links = [
   .desktop-nav > a:focus-visible,
   .services-menu > a:hover,
   .services-menu > a:focus-visible {
-    color: #8a6a2f;
+    color: #d12240;
+  }
+
+  .desktop-nav > a.active,
+  .services-menu > a.active {
+    color: #d12240;
+  }
+
+  .desktop-nav > a.active::after,
+  .services-menu > a.active::after {
+    position: absolute;
+    right: 0;
+    bottom: 0.72rem;
+    left: 0;
+    height: 2px;
+    background: #d12240;
+    content: '';
   }
 
   .services-menu {
@@ -130,7 +155,7 @@ const links = [
 
   .submenu {
     position: absolute;
-    top: calc(100% - 0.5rem);
+    top: 100%;
     left: 50%;
     display: grid;
     width: max-content;
@@ -150,8 +175,10 @@ const links = [
   }
 
   .submenu a:hover,
-  .submenu a:focus-visible {
-    color: #d9c08a;
+  .submenu a:focus-visible,
+  .submenu a.active {
+    color: #fff;
+    background: #d12240;
   }
 
   .services-menu:hover .submenu,
@@ -229,6 +256,10 @@ const links = [
       display: grid;
       padding-left: 1rem;
       border-left: 1px solid #d9d5cc;
+    }
+
+    .mobile-nav nav .active {
+      color: #ef304d;
     }
   }
 </style>
