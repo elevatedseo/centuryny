@@ -1,6 +1,6 @@
 export const announcement = {
   enabled: true,
-  message: 'Announcement content pending verification',
+  message: 'New York’s leading property management company.',
   href: null,
   linkLabel: null,
 } as const;
