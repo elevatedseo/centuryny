@@ -28,6 +28,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta name="twitter:card" content="summary" />
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-S35M5FXWR5"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-S35M5FXWR5');
+    </script>
     <script is:inline type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'RealEstateAgent',
