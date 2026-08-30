@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://centuryny.com/</loc>
-  </url>
+  <url><loc>https://centuryny.com/</loc></url>
+  <url><loc>https://centuryny.com/about-us/</loc></url>
+  <url><loc>https://centuryny.com/contact-us/</loc></url>
+  <url><loc>https://centuryny.com/featured-properties/</loc></url>
+  <url><loc>https://centuryny.com/our-services/financial-management/</loc></url>
+  <url><loc>https://centuryny.com/our-services/project-management/</loc></url>
+  <url><loc>https://centuryny.com/our-services/property-management/</loc></url>
+  <url><loc>https://centuryny.com/portfolio-item/160-east-22nd-street-2/</loc></url>
+  <url><loc>https://centuryny.com/portfolio-item/205-water-street-2/</loc></url>
+  <url><loc>https://centuryny.com/portfolio-item/29-45-tenants-corp-2/</loc></url>
+  <url><loc>https://centuryny.com/portfolio-item/303-east-33rd-street-condo-2/</loc></url>
+  <url><loc>https://centuryny.com/portfolio-item/400-park-avenue-south-2/</loc></url>
+  <url><loc>https://centuryny.com/portfolio-item/440-east-79th-street-2/</loc></url>
+  <url><loc>https://centuryny.com/portfolio-item/444-east-86th-street-owners-corp/</loc></url>
+  <url><loc>https://centuryny.com/portfolio-item/brooklyn-pierhouse/</loc></url>
+  <url><loc>https://centuryny.com/portfolio-item/cherokee-owners-corp-2/</loc></url>
+  <url><loc>https://centuryny.com/portfolio-item/morgan-house-condominium/</loc></url>
+  <url><loc>https://centuryny.com/portfolio-item/abingdon-condo-2/</loc></url>
 </urlset>
