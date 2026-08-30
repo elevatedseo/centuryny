@@ -28,6 +28,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta name="twitter:card" content="summary" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'RealEstateAgent',
+      name: 'Century NY',
+      url: 'https://centuryny.com',
+      sameAs: ['https://maps.app.goo.gl/jNEVCTPZkF4YoifCA'],
+    })} />
     <title>{title}</title>
   </head>
   <body>
