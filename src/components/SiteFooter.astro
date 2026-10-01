@@ -1,4 +1,6 @@
 ---
+import ElevatedSecurityBadge from './ElevatedSecurityBadge.astro';
+
 const centuryLinks = [
   { label: 'About', href: '/about-us/' },
   { label: 'Services', href: '/our-services/property-management/' },
@@ -72,6 +74,7 @@ const serviceLinks = [
   <div class="footer-bottom">
     <p>© {new Date().getFullYear()} Century Management. All rights reserved.</p>
   </div>
+<ElevatedSecurityBadge />
 </footer>
 
 <style>
